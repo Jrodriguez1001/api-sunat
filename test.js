@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const axios = require("axios");
 const cron = require("node-cron");
+const cors = require("cors");
 
 const app = express();
 const PORT = 3002;
@@ -42,6 +43,7 @@ obtenerDatosAPI();
 
 // Configuramos una tarea programada para que se ejecute todos los días a las 6:00 am
 cron.schedule("0 6 * * *", obtenerDatosAPI);
+app.use(cors());
 
 // Creamos una ruta en Express para mostrar los datos del archivo JSON
 app.get("/", (req, res) => {
